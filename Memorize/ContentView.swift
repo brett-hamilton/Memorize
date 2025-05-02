@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-    let halloweenEmojis: [String]   = ["👻", "👻", "🕷️", "🕷️", "🎃", "🎃", "🧙‍♀️", "🧙‍♀️", "😱", "😱", "🍭", "🍭"]
+    let sportsEmojis: [String]      = ["🏀", "🏀", "🏈", "🏈", "🥎", "🥎", "⚾️", "⚾️", "🏐", "🏐", "⚽️", "⚽️"]
     let carEmojis: [String]         = ["🚗", "🚗", "🚙", "🚙", "🛻", "🛻", "🏎️", "🏎️", "🚕", "🚕", "🚓", "🚓"]
     let fruitEmojis: [String]       = ["🍒", "🍒", "🍓", "🍓", "🍎", "🍎", "🍑", "🍑", "🍌", "🍌", "🫐", "🫐"]
     let weatherEmojis: [String]     = ["☀️", "☀️", "⛅️", "⛅️", "🌧️", "🌧️", "❄️", "❄️", "⛈️", "⛈️", "🌬️", "🌬️"]
     
     @State var cardCount: Int = 4
+    @State var selectedTheme: [String] = ["", "", "", ""]   // Default to blank cards on app start, until theme is chosen
     
     var body: some View {
         VStack {
@@ -21,16 +22,58 @@ struct ContentView: View {
             ScrollView {
                 cards
             }
-            
+            themePickers
         }
         .padding()
+    }
+    
+    var themePickers: some View {
+        HStack {
+            sportsTheme
+            Spacer()
+            carTheme
+            Spacer()
+            fruitTheme
+            Spacer()
+            weatherTheme
+        }
+        .font(.title3)
+    }
+    
+    var sportsTheme: some View {
+        pickTheme(sportsEmojis, name: "Sports", symbol: "figure.basketball")
+    }
+    
+    var carTheme: some View {
+        pickTheme(carEmojis, name: "Cars", symbol: "car.fill")
+    }
+    
+    var fruitTheme: some View {
+        pickTheme(fruitEmojis, name: "Fruit", symbol: "fork.knife")
+    }
+    
+    var weatherTheme: some View {
+        pickTheme(weatherEmojis, name: "Weather", symbol: "sun.max.fill")
+    }
+            
+    func pickTheme(_ theme: [String], name: String, symbol: String) -> some View {
+        Button(action: {
+            selectedTheme = theme
+            selectedTheme.shuffle()
+        }, label: {
+            VStack {
+                Image(systemName: symbol)
+                Text(name)
+            }
+        })
     }
     
     var cards: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
             ForEach(0..<cardCount, id: \.self) { index in
-                CardView(content: carEmojis[index])
+                CardView(content: selectedTheme[index])
                     .aspectRatio(2/3, contentMode: .fit)
+                
             }
         }
         .foregroundColor(.orange)
