@@ -13,8 +13,7 @@ struct ContentView: View {
     let fruitEmojis: [String]       = ["🍒", "🍒", "🍓", "🍓", "🍎", "🍎", "🍑", "🍑", "🍌", "🍌", "🫐", "🫐"]
     let weatherEmojis: [String]     = ["☀️", "☀️", "⛅️", "⛅️", "🌧️", "🌧️", "❄️", "❄️", "⛈️", "⛈️", "🌬️", "🌬️"]
     
-    @State var cardCount: Int = 12
-    @State var selectedTheme: [String] = Array(repeating: "❓", count: 12)   // Default to question mark emojis on app start, until theme is chosen
+    @State var selectedTheme: [String] = []     // Defaults to no cards shown until a theme is picked
     
     var body: some View {
         VStack {
@@ -37,7 +36,10 @@ struct ContentView: View {
             Spacer()
             weatherTheme
         }
-        .font(.title3)
+        .font(.footnote)
+        .imageScale(.large)
+        .padding(.leading)
+        .padding(.trailing)
     }
     
     var sportsTheme: some View {
@@ -70,7 +72,7 @@ struct ContentView: View {
     
     var cards: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]) {
-            ForEach(0..<cardCount, id: \.self) { index in
+            ForEach(selectedTheme.indices, id: \.self) { index in
                 CardView(content: selectedTheme[index])
                     .aspectRatio(2/3, contentMode: .fit)
                 
