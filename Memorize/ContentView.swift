@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    let emojis: [String] = ["👻", "🎃", "🕷️", "😈", "💀", "🕸️", "🧙‍♀️", "🙀", "👹", "😱", "☠️", "🍭"]
+    let halloweenEmojis: [String]   = ["👻", "👻", "🕷️", "🕷️", "🎃", "🎃", "🧙‍♀️", "🧙‍♀️", "😱", "😱", "🍭", "🍭"]
+    let carEmojis: [String]         = ["🚗", "🚗", "🚙", "🚙", "🛻", "🛻", "🏎️", "🏎️", "🚕", "🚕", "🚓", "🚓"]
+    let fruitEmojis: [String]       = ["🍒", "🍒", "🍓", "🍓", "🍎", "🍎", "🍑", "🍑", "🍌", "🍌", "🫐", "🫐"]
+    let weatherEmojis: [String]     = ["☀️", "☀️", "⛅️", "⛅️", "🌧️", "🌧️", "❄️", "❄️", "⛈️", "⛈️", "🌬️", "🌬️"]
     
     @State var cardCount: Int = 4
     
@@ -26,7 +29,7 @@ struct ContentView: View {
     var cards: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
             ForEach(0..<cardCount, id: \.self) { index in
-                CardView(content: emojis[index])
+                CardView(content: carEmojis[index])
                     .aspectRatio(2/3, contentMode: .fit)
             }
         }
