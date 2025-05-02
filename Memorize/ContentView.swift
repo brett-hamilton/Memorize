@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    let emojis: [String] = ["👻", "🎃", "🕷️", "😈"]
+    
     var body: some View {
         HStack {
-            let emojis: [String] = ["👻", "🎃", "🕷️", "😈"]
-            CardView(content: emojis[0], isFaceUp: false)
-            CardView(content: emojis[1])
-            CardView(content: emojis[2])
-            CardView(content: emojis[3])
+            ForEach(emojis.indices, id: \.self) { index in
+                CardView(content: emojis[index])
+            }
         }
         .foregroundColor(.orange)
         .padding()
