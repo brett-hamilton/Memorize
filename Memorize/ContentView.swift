@@ -13,8 +13,8 @@ struct ContentView: View {
     let fruitEmojis: [String]       = ["🍒", "🍒", "🍓", "🍓", "🍎", "🍎", "🍑", "🍑", "🍌", "🍌", "🫐", "🫐"]
     let weatherEmojis: [String]     = ["☀️", "☀️", "⛅️", "⛅️", "🌧️", "🌧️", "❄️", "❄️", "⛈️", "⛈️", "🌬️", "🌬️"]
     
-    @State var cardCount: Int = 4
-    @State var selectedTheme: [String] = ["", "", "", ""]   // Default to blank cards on app start, until theme is chosen
+    @State var cardCount: Int = 12
+    @State var selectedTheme: [String] = Array(repeating: "❓", count: 12)   // Default to question mark emojis on app start, until theme is chosen
     
     var body: some View {
         VStack {
@@ -69,20 +69,20 @@ struct ContentView: View {
     }
     
     var cards: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]) {
             ForEach(0..<cardCount, id: \.self) { index in
                 CardView(content: selectedTheme[index])
                     .aspectRatio(2/3, contentMode: .fit)
                 
             }
         }
-        .foregroundColor(.orange)
+        .foregroundColor(.red)
     }
 }
 
 struct CardView: View {
     let content: String
-    @State var isFaceUp = true
+    @State var isFaceUp = false
     
     var body: some View {
         ZStack {
