@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    var viewModel: EmojiMemoryGame
+    
     let sportsEmojis: [String]      = ["🏀", "🏀", "🏈", "🏈", "🥎", "🥎", "⚾️", "⚾️", "🏐", "🏐", "⚽️", "⚽️"]
     let carEmojis: [String]         = ["🚗", "🚗", "🚙", "🚙", "🛻", "🛻", "🏎️", "🏎️", "🚕", "🚕", "🚓", "🚓"]
     let fruitEmojis: [String]       = ["🍒", "🍒", "🍓", "🍓", "🍎", "🍎", "🍑", "🍑", "🍌", "🍌", "🫐", "🫐"]
