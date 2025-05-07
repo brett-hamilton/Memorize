@@ -12,6 +12,7 @@ struct EmojiMemoryGameView: View {
     
     var body: some View {
         VStack {
+            Text("Theme: \(viewModel.themeName.capitalized)").font(.largeTitle)
             ScrollView {
                 cards
                     .animation(.default, value: viewModel.cards)

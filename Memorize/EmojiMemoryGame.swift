@@ -39,6 +39,10 @@ class EmojiMemoryGame: ObservableObject {
         }
     }
     
+    var themeName: String {
+        EmojiMemoryGame.currentTheme.name
+    }
+    
     // MARK: - Intents
     
     func shuffle() {
