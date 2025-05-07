@@ -34,14 +34,31 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                     if cards[chosenIndex].content == cards[potentialMatchIndex].content {
                         cards[chosenIndex].isMatched = true
                         cards[potentialMatchIndex].isMatched = true
-                        score += 2
+                        adjustScore(by: +2)
+                    } else {
+                        if cards[chosenIndex].previouslySeen {
+                            adjustScore(by: -1)
+                        } else {
+                            cards[chosenIndex].previouslySeen.toggle()
+                        }
+                        
+                        if cards[potentialMatchIndex].previouslySeen {
+                            adjustScore(by: -1)
+                        } else {
+                            cards[potentialMatchIndex].previouslySeen.toggle()
+                        }
                     }
+                    
                 } else {
                     indexOfTheOneAndOnlyFaceUpCard = chosenIndex
                 }
                 cards[chosenIndex].isFaceUp = true
             }
         }
+    }
+    
+    private mutating func adjustScore(by value: Int) {
+        score += value
     }
     
     mutating func shuffle() {
