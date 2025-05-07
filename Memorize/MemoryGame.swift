@@ -46,6 +46,13 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         print(cards)
     }
     
+    mutating func restart() {
+        for index in cards.indices {
+            cards[index].isFaceUp = false
+            cards[index].isMatched = false
+        }
+    }
+    
     struct Card: Equatable, Identifiable, CustomDebugStringConvertible {
         var isFaceUp = false
         var isMatched = false

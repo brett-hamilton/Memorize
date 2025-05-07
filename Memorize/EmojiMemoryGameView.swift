@@ -16,9 +16,7 @@ struct EmojiMemoryGameView: View {
                 cards
                     .animation(.default, value: viewModel.cards)
             }
-            Button("Shuffle") {
-                viewModel.shuffle()
-            }
+            buttons
         }
         .padding()
     }
@@ -35,6 +33,18 @@ struct EmojiMemoryGameView: View {
             }
         }
         .foregroundColor(.red)
+    }
+    
+    var buttons: some View {
+        HStack {
+            Button("Shuffle") {
+                viewModel.shuffle()
+            }
+            Spacer()
+            Button("New Game") {
+                viewModel.restart()
+            }
+        }
     }
 }
 
