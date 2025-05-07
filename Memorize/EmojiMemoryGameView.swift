@@ -32,7 +32,7 @@ struct EmojiMemoryGameView: View {
                     }
             }
         }
-        .foregroundColor(.red)
+        .foregroundColor(viewModel.cardColor)
     }
     
     var buttons: some View {

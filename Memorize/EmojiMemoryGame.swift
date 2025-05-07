@@ -9,6 +9,7 @@ import SwiftUI
 
 class EmojiMemoryGame: ObservableObject {
     
+
     private static func createMemoryGame(with theme: Theme?) -> MemoryGame<String> {
         var emojis: [String] = []
         
@@ -19,10 +20,23 @@ class EmojiMemoryGame: ObservableObject {
         }
     }
     
-    @Published private var model = createMemoryGame(with: Theme.themes.randomElement())
+    private static var currentTheme: Theme = Theme.themes.randomElement()!
+    @Published private var model = createMemoryGame(with: currentTheme)
     
     var cards: [MemoryGame<String>.Card] {
         model.cards
+    }
+    
+    var cardColor: Color {
+        switch EmojiMemoryGame.currentTheme.color {
+        case "blue": return .blue
+        case "yellow": return .yellow
+        case "green": return .green
+        case "orange": return .orange
+        case "cyan": return .cyan
+        case "purple": return .purple
+        default: return .gray
+        }
     }
     
     // MARK: - Intents
@@ -32,7 +46,8 @@ class EmojiMemoryGame: ObservableObject {
     }
     
     func restart() {
-        model = EmojiMemoryGame.createMemoryGame(with: Theme.themes.randomElement())
+        EmojiMemoryGame.currentTheme = Theme.themes.randomElement()!
+        model = EmojiMemoryGame.createMemoryGame(with: EmojiMemoryGame.currentTheme)
     }
     
     func choose(_ card: MemoryGame<String>.Card) {
