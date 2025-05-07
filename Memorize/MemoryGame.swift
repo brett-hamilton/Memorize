@@ -51,6 +51,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
             cards[index].isFaceUp = false
             cards[index].isMatched = false
         }
+        self.shuffle()
     }
     
     struct Card: Equatable, Identifiable, CustomDebugStringConvertible {
