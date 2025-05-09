@@ -47,6 +47,10 @@ class EmojiMemoryGame: ObservableObject {
         EmojiMemoryGame.currentTheme.name
     }
     
+    var cardCount: Int {
+        EmojiMemoryGame.currentTheme.pairsCount * 2
+    }
+    
     // MARK: - Intents
     
     func shuffle() {
