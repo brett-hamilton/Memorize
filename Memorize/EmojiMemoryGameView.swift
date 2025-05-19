@@ -18,7 +18,6 @@ struct EmojiMemoryGameView: View {
             Text("Theme: \(viewModel.themeName.capitalized)").font(.subheadline)
             ScrollView {
                 cards
-                    .animation(.default, value: viewModel.cards)
             }
             buttons
         }
@@ -30,7 +29,9 @@ struct EmojiMemoryGameView: View {
             CardView(card)
                 .padding(4)
                 .onTapGesture {
-                    viewModel.choose(card)
+                    withAnimation(.easeInOut(duration: 3)) {
+                        viewModel.choose(card)
+                    }
                 }
         }
         .foregroundColor(viewModel.cardColor)
@@ -39,7 +40,9 @@ struct EmojiMemoryGameView: View {
     var buttons: some View {
         HStack {
             Button("Shuffle") {
-                viewModel.shuffle()
+                withAnimation {
+                    viewModel.shuffle()
+                }
             }
             Spacer()
             Button("New Game") {
